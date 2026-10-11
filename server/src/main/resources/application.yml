@@ -1,0 +1,124 @@
+xxx:
+  jwt:
+    admin-secret-key: ${JWT_SECRET:change-me-before-production}
+    admin-ttl: ${JWT_TTL:7200000}
+    admin-token-name: token
+
+langchain4j:
+  open-ai:
+    chat-model:
+      base-url: ${QWEN_BASE_URL:https://dashscope.aliyuncs.com/compatible-mode/v1}
+      api-key: ${QWEN_API_KEY:}
+      model-name: ${QWEN_MODEL_NAME:qwen3-vl-plus}
+      log-requests: ${AI_LOG_REQUESTS:false}
+      log-responses: ${AI_LOG_RESPONSES:false}
+    streaming-chat-model:
+      base-url: ${QWEN_BASE_URL:https://dashscope.aliyuncs.com/compatible-mode/v1}
+      api-key: ${QWEN_API_KEY:}
+      model-name: ${QWEN_MODEL_NAME:qwen3-vl-plus}
+      log-requests: ${AI_LOG_REQUESTS:false}
+
+logging:
+  level:
+    dev.langchain4j.http.client.log.LoggingHttpClient: ${LANGCHAIN_LOG_LEVEL:INFO}
+    dev.ai4j.openai4j: ${OPENAI4J_LOG_LEVEL:INFO}
+
+doubao:
+  chat:
+    base-url: ${DOUBAO_BASE_URL:https://ark.cn-beijing.volces.com/api/v3}
+    api-key: ${DOUBAO_API_KEY:}
+    model-name: ${DOUBAO_MODEL_NAME:}
+  content:
+    base-url: ${DOUBAO_BASE_URL:https://ark.cn-beijing.volces.com/api/v3}
+    api-key: ${DOUBAO_API_KEY:}
+    model-name: ${DOUBAO_CONTENT_MODEL_NAME:}
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: org.example.pojo
+
+mail:
+  senders:
+    QQ:
+      host: smtp.qq.com
+      port: 587
+      username: ${QQ_MAIL_USERNAME:}
+      password: ${QQ_MAIL_PASSWORD:}
+      starttls-enable: true
+      ssl-enable: false
+    139:
+      host: smtp.139.com
+      port: 465
+      username: ${MAIL_139_USERNAME:}
+      password: ${MAIL_139_PASSWORD:}
+      starttls-enable: false
+      ssl-enable: true
+    189:
+      host: smtp.189.cn
+      port: 465
+      username: ${MAIL_189_USERNAME:}
+      password: ${MAIL_189_PASSWORD:}
+      starttls-enable: false
+      ssl-enable: true
+
+debug: ${DEBUG_ENABLED:false}
+
+spring:
+  application:
+    name: server
+  datasource:
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/huanbao?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true}
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: ${SHOW_SQL:false}
+    defer-datasource-initialization: true
+  thymeleaf:
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 10
+          min-idle: 1
+          time-between-eviction-runs: 10s
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 100MB
+
+server:
+  port: ${SERVER_PORT:8089}
+
+mybatis-plus:
+  type-aliases-package: com.itheima.mp.domain.po
+  global-config:
+    db-config:
+      id-type: auto
+      update-strategy: not_null
+      logic-delete-field: deleted
+
+aliyun:
+  oss:
+    endpoint: ${ALIYUN_OSS_ENDPOINT:}
+    access-key-id: ${ALIYUN_OSS_ACCESS_KEY_ID:}
+    access-key-secret: ${ALIYUN_OSS_ACCESS_KEY_SECRET:}
+    bucket-name: ${ALIYUN_OSS_BUCKET_NAME:}
+    file-host: ${ALIYUN_OSS_FILE_HOST:}
+
+baidu:
+  map:
+    ak: ${BAIDU_MAP_AK:}
+    geocoding-url: ${BAIDU_GEOCODING_URL:http://api.map.baidu.com/geocoding/v3/}
