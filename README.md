@@ -1,52 +1,34 @@
-# 绿易坊后端
+# 绿易坊 - AI 驱动的环保生态
 
-绿易坊是面向校园和社区绿色生活场景的环保应用。本仓库提供后端服务，支持环保咨询、图文估价、附近闲置物查询、绿色行动、社区内容、即时消息和用户管理等能力，为线下以物易物提供价值参考和就近匹配支撑。
+绿易坊面向校园与社区绿色生活场景，围绕闲置物品线下以物易物提供 AI 估价参考、附近匹配、环保知识咨询、绿色行动和社区交流等服务。
 
-## 技术栈
+本仓库将项目按前后端分目录管理：
 
-- Java 17、Spring Boot、Maven
-- MyBatis-Plus、MySQL、Redis
-- LangChain4j 兼容模型服务与 SSE 流式输出
-- 阿里云 OSS、WebSocket、邮件服务
-
-## 模块说明
-
-| 模块 | 说明 |
+| 目录 | 说明 |
 | --- | --- |
-| `pojo` | 领域实体、数据传输对象和视图对象 |
-| `common` | 公共配置、工具类、统一响应与异常处理 |
-| `server` | 接口、业务服务、数据访问、AI 编排与消息能力 |
+| [`frontend`](./frontend) | Vue 3 + TypeScript + Vite 网页端，包含生态观察、闲置绿洲、绿色行动、智能助手、环保圈和个人中心等界面。 |
+| [`backend`](./backend) | Java 17 + Spring Boot 后端，提供环保咨询、图文估价、附近闲置物查询、任务、社区、消息和用户等接口服务。 |
 
-## 本地运行
+## 本地开发
 
-1. 准备 JDK 17、MySQL 和 Redis。
-2. 按需设置下方环境变量；不要将真实密钥或生产连接信息提交到仓库。
-3. 在仓库根目录执行：
+前端：
 
 ```powershell
+cd frontend
+pnpm install
+pnpm dev
+```
+
+后端：
+
+```powershell
+cd backend
 .\mvnw.cmd clean package -DskipTests
 .\mvnw.cmd -pl server spring-boot:run
 ```
 
-`server/src/main/resources/application.yml` 已使用环境变量配置模型服务、数据库、Redis、对象存储与邮件服务。常用变量包括：
-
-```text
-JWT_SECRET
-QWEN_API_KEY
-DOUBAO_API_KEY
-MYSQL_URL
-MYSQL_USERNAME
-MYSQL_PASSWORD
-REDIS_HOST
-REDIS_PORT
-REDIS_PASSWORD
-ALIYUN_OSS_ENDPOINT
-ALIYUN_OSS_ACCESS_KEY_ID
-ALIYUN_OSS_ACCESS_KEY_SECRET
-ALIYUN_OSS_BUCKET_NAME
-BAIDU_MAP_AK
-```
+后端运行需要 JDK 17、MySQL 和 Redis。模型服务、数据库、对象存储和邮件服务均通过环境变量配置，变量清单见 [`backend/README.md`](./backend/README.md)。前端通过 `frontend/.env.development` 或 `frontend/.env.production` 设置接口服务地址。
 
 ## 说明
 
-图文估价结果用于辅助用户理解物品相对价值与协商交换，不构成成交报价或专业鉴定结论。生产部署应使用独立的环境变量管理、最小权限账号和脱敏日志策略。
+AI 估价用于帮助用户理解物品的相对价值并协商交换，不构成成交报价或专业鉴定结论。提交代码前请确认不包含真实服务密钥、生产账号、个人信息或未获授权的数据。
